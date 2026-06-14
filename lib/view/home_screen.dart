@@ -1,3 +1,4 @@
+import 'package:ai38re/view/add_product_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +13,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder:(context) => ManageProductScreen(),));
+        },
         icon: Icon(Icons.add),
         label: Text("Add Products"),
       ),

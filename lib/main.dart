@@ -1,7 +1,11 @@
 import 'package:ai38re/constants/colors.dart';
 import 'package:ai38re/constants/image.dart';
+import 'package:ai38re/repo/product_repo.dart';
+import 'package:ai38re/repo/product_repo_impl.dart';
 import 'package:ai38re/view/home_screen.dart';
+import 'package:ai38re/viewmodel/product_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,13 +17,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: black),
+    return MultiProvider(
+      providers: [
+        Provider<ProductRepo>(create: (_)=> ProductRepoImpl()),
+
+        ChangeNotifierProvider(
+          create: (context) =>
+              ProductViewModel(productRepo: context.read<ProductRepo>()),
+        ),
+
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: .fromSeed(seedColor: black),
+        ),
+        home: HomeScreen(),
       ),
-      home: HomeScreen(),
     );
   }
 }
