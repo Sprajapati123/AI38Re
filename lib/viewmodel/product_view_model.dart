@@ -105,11 +105,51 @@ class ProductViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> getAllProduct() {}
+  Future<void> getAllProduct() async{
+    setLoading(true);
+    setError(null);
+    try {
+      _allProducts = await _productRepo.getAllProduct();
+    } on Exception catch (e) {
+      setError(e.toString());
+    }finally{
+      setLoading(false);
+    }
+  }
 
-  Future<void> getProductByCategory(String categoryId) {}
+  Future<void> getProductByCategory(String categoryId) async{
+    setLoading(true);
+    setError(null);
+    try {
+      _categoryProducts = await _productRepo.getProductByCategory(categoryId);
+    } on Exception catch (e) {
+      setError(e.toString());
+    }finally{
+      setLoading(false);
+    }
+  }
 
-  Future<void> searchProduct(String name) {}
+  Future<void> searchProduct(String name) async{
+    setLoading(true);
+    setError(null);
+    try {
+      _searchProducts = await _productRepo.searchProduct(name);
+    } on Exception catch (e) {
+      setError(e.toString());
+    }finally{
+      setLoading(false);
+    }
+  }
 
-  Future<void> filterProduct(double price) {}
+  Future<void> filterProduct(double price) async{
+    setLoading(true);
+    setError(null);
+    try {
+      _filterProducts = await _productRepo.filterProduct(price);
+    } on Exception catch (e) {
+      setError(e.toString());
+    }finally{
+      setLoading(false);
+    }
+  }
 }
