@@ -4,10 +4,17 @@ import 'package:ai38re/repo/product_repo.dart';
 import 'package:ai38re/repo/product_repo_impl.dart';
 import 'package:ai38re/view/home_screen.dart';
 import 'package:ai38re/viewmodel/product_view_model.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp(
+     options: DefaultFirebaseOptions.currentPlatform,
+   );
   runApp(const MyApp());
 }
 

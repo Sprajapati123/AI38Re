@@ -1,6 +1,7 @@
 import 'package:ai38re/model/product_model.dart';
 import 'package:ai38re/viewmodel/product_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class ManageProductScreen extends StatefulWidget {
@@ -37,7 +38,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
               final success = await vm.addProduct(model);
               if (success) {
                 Navigator.pop(context);
-              } else {}
+              } else {
+                Fluttertoast.showToast(msg: vm.error.toString());
+              }
             },
             child: vm.loading
                 ? CircularProgressIndicator()

@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "478037530844",
+    "project_id": "ai-984bd",
+    "storage_bucket": "ai-984bd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478037530844:android:f82791bc4961a2411cbc19",
+        "android_client_info": {
+          "package_name": "com.example.ai38ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASl0W4n8_3OudjiuvI4fGwoDOLTSLrtgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478037530844:android:09d7d1006b7c33fd1cbc19",
+        "android_client_info": {
+          "package_name": "com.example.ai38re"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASl0W4n8_3OudjiuvI4fGwoDOLTSLrtgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478037530844:android:5b26d659b2661cc61cbc19",
+        "android_client_info": {
+          "package_name": "com.example.petshop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASl0W4n8_3OudjiuvI4fGwoDOLTSLrtgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
