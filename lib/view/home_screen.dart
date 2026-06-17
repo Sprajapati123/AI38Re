@@ -45,9 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 final data = vm.allProducts![index];
                 return Column(
                   children: [
-                    Text(data.name!),
-                    Text(data.price!.toString()),
-                    Text(data.description!),
+                    Text("${data.name}"),
+                    Text("${data.price}"),
+                    Text("${data.description}"),
                   ],
                 );
               },
