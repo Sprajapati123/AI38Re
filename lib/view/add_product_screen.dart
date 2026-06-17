@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 class ManageProductScreen extends StatefulWidget {
   final id;
+
   const ManageProductScreen({super.key, this.id});
 
   @override
@@ -18,8 +19,24 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
   final descController = TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.id != null) {
+        context.read<ProductViewModel>().getProductById(widget.id);
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final vm = context.watch<ProductViewModel>();
+    if (widget.id != null && vm.product != null) {
+      nameController.text = "${vm.product?.name}";
+      priceController.text = "${vm.product?.price}";
+      descController.text = "${vm.product?.description}";
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.id == null ? "Add Product" : "Update Product"),
@@ -32,7 +49,7 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
 
           ElevatedButton(
             onPressed: () async {
-              if(widget.id == null){
+              if (widget.id == null) {
                 //add
                 final model = ProductModel(
                   id: "",
@@ -46,7 +63,7 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                 } else {
                   Fluttertoast.showToast(msg: vm.error.toString());
                 }
-              }else{
+              } else {
                 //update
               }
             },
