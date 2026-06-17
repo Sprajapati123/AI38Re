@@ -65,6 +65,18 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                 }
               } else {
                 //update
+                final model = ProductModel(
+                  id: widget.id,
+                  name: nameController.text,
+                  price: double.parse(priceController.text),
+                  description: descController.text,
+                );
+                final success = await vm.updateProduct(model);
+                if (success) {
+                  Navigator.pop(context);
+                } else {
+                  Fluttertoast.showToast(msg: vm.error.toString());
+                }
               }
             },
             child: vm.loading

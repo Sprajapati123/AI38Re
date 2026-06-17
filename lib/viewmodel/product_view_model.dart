@@ -56,6 +56,7 @@ class ProductViewModel extends ChangeNotifier {
     setError(null);
     try {
       await _productRepo.addProduct(model);
+      await getAllProduct();
       return true;
     } on Exception catch (e) {
       setError(e.toString());
@@ -70,6 +71,7 @@ class ProductViewModel extends ChangeNotifier {
     setError(null);
     try {
       await _productRepo.deleteproduct(id);
+      await getAllProduct();
       return true;
     } on Exception catch (e) {
       setError(e.toString());
@@ -84,6 +86,7 @@ class ProductViewModel extends ChangeNotifier {
     setError(null);
     try {
       await _productRepo.updateProduct(model);
+      await getAllProduct();
       return true;
     } on Exception catch (e) {
       setError(e.toString());
