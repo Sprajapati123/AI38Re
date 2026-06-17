@@ -6,8 +6,7 @@ import 'package:provider/provider.dart';
 
 class ManageProductScreen extends StatefulWidget {
   final id;
-
-  const ManageProductScreen({super.key,this.id,});
+  const ManageProductScreen({super.key, this.id});
 
   @override
   State<ManageProductScreen> createState() => _ManageProductScreenState();
@@ -22,7 +21,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
   Widget build(BuildContext context) {
     final vm = context.watch<ProductViewModel>();
     return Scaffold(
-      appBar: AppBar(title: Text("Add Product")),
+      appBar: AppBar(
+        title: Text(widget.id == null ? "Add Product" : "Update Product"),
+      ),
       body: Column(
         children: [
           TextFormField(controller: nameController),
@@ -31,22 +32,27 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
 
           ElevatedButton(
             onPressed: () async {
-              final model = ProductModel(
-                id: "",
-                name: nameController.text,
-                price: double.parse(priceController.text),
-                description: descController.text,
-              );
-              final success = await vm.addProduct(model);
-              if (success) {
-                Navigator.pop(context);
-              } else {
-                Fluttertoast.showToast(msg: vm.error.toString());
+              if(widget.id == null){
+                //add
+                final model = ProductModel(
+                  id: "",
+                  name: nameController.text,
+                  price: double.parse(priceController.text),
+                  description: descController.text,
+                );
+                final success = await vm.addProduct(model);
+                if (success) {
+                  Navigator.pop(context);
+                } else {
+                  Fluttertoast.showToast(msg: vm.error.toString());
+                }
+              }else{
+                //update
               }
             },
             child: vm.loading
                 ? CircularProgressIndicator()
-                : Text("Add Product"),
+                : Text(widget.id == null ? "Add Product" : "Update Product"),
           ),
         ],
       ),
