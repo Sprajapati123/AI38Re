@@ -56,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ManageProductScreen(id: data.id.toString(),)),
                       );
                     }, child: Text("Edit")),
-                    TextButton(onPressed: () {}, child: Text("Delete")),
+                    TextButton(onPressed: () async{
+                      await vm.deleteproduct(data.id.toString());
+                    }, child: Text("Delete")),
                   ],
                 );
               },
