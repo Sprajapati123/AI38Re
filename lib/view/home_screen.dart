@@ -13,8 +13,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    // TODO: implement initState
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProductViewModel>().getAllProduct();
     });
@@ -44,10 +42,21 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 final data = vm.allProducts![index];
                 return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("${data.name}"),
                     Text("${data.price}"),
                     Text("${data.description}"),
+
+                    TextButton(onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            ManageProductScreen(id: data.id.toString(),)),
+                      );
+                    }, child: Text("Edit")),
+                    TextButton(onPressed: () {}, child: Text("Delete")),
                   ],
                 );
               },

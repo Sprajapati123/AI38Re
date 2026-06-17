@@ -5,7 +5,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class ManageProductScreen extends StatefulWidget {
-  const ManageProductScreen({super.key});
+  final id;
+
+  const ManageProductScreen({super.key,this.id,});
 
   @override
   State<ManageProductScreen> createState() => _ManageProductScreenState();
