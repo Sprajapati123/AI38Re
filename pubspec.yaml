@@ -40,6 +40,10 @@ dependencies:
   firebase_core:
   fluttertoast:
 
+  cached_network_image:
+  image_picker: ^1.1.2
+  cloudinary_public: ^0.23.1
+
 
 dev_dependencies:
   flutter_test:
