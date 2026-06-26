@@ -3,7 +3,15 @@ import 'package:ai38re/repo/product_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductRepoImpl implements ProductRepo {
-  final collection = FirebaseFirestore.instance.collection("products");
+  // The Firestore instance. Defaults to the real one, but a test can pass in
+  // a FakeFirebaseFirestore so no real database is touched.
+  final FirebaseFirestore firestore;
+
+  ProductRepoImpl({FirebaseFirestore? firestore})
+      : firestore = firestore ?? FirebaseFirestore.instance;
+
+  CollectionReference<Map<String, dynamic>> get collection =>
+      firestore.collection("products");
 
   @override
   Future<void> addProduct(ProductModel model) async {

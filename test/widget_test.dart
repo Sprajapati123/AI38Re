@@ -1,30 +1,63 @@
-// This is a basic Flutter widget test.
+// ============================================================
+//  WIDGET TEST  =  test what is on the screen
+// ============================================================
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// Run it with:   flutter test test/widget_test.dart
+//
+// Steps:
+//   1. tester.pumpWidget(...)  -> show the widget
+//   2. find.text('...')        -> look for something
+//   3. expect(..., findsOneWidget)  -> check it is there
+//   4. tester.tap(...) + pump  -> press a button and refresh
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ai38re/main.dart';
+// A tiny screen we will test: a number and a button that adds 1.
+class CounterScreen extends StatefulWidget {
+  const CounterScreen({super.key});
+  @override
+  State<CounterScreen> createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  int count = 0;
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Column(
+          children: [
+            Text('$count'),
+            ElevatedButton(
+              onPressed: () => setState(() => count++),
+              child: const Text('Add'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('shows 0 at the start', (tester) async {
+    // 1. show the screen
+    await tester.pumpWidget(const CounterScreen());
 
-    // Verify that our counter starts at 0.
+    // 2 + 3. the number 0 should be on screen
     expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+  testWidgets('tapping Add changes 0 to 1', (tester) async {
+    await tester.pumpWidget(const CounterScreen());
+
+    // 4. tap the button, then refresh the screen
+    await tester.tap(find.text('Add'));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
+    // now it should show 1, not 0
     expect(find.text('1'), findsOneWidget);
+    expect(find.text('0'), findsNothing);
   });
 }
